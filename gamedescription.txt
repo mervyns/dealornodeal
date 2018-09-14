@@ -1,0 +1,72 @@
+There are 25 numbered boxes with different values.
+[1, 5, 10, 15, 25, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 5000, 10000, 25000, 50000,
+75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000]
+The 26 different values are shown on the screen.
+The Player chooses one box for himself. This box will become the Player's Box
+// First Round
+The player must choose 6 boxes.
+The 6 selected boxes will open and show the value.
+There are 18 sealed Boxes Left
+Once the value is shown, the values are cancelled on the display(Background changes color ie Blue To Red)
+The Banker will give the player an offer to buy his box.
+Player can decide to accept or reject the offer.
+If player accepts the offer, the game ends and the player's bank will have the amount that was offered.
+If player rejects the offer, the game continues.
+// Second Round
+The player selects another 5 boxes.
+The 5 selected boxes will open and show the value.
+There are 13 sealed boxes left
+Once the value is shown, the values are cancelled on the display(Background changes color ie Blue To Red)
+The Banker will give the player an offer to buy his box.
+Player can decide to accept or reject the offer.
+If player accepts the offer, the game ends and the player's bank will have the amount that was offered.
+If player rejects the offer, the game continues.
+// Third Round
+The player selects another 4 boxes.
+The 4 selected boxes will open and show the value.
+There are 9 sealed boxes left.
+Once the value is shown, the values are cancelled on the display(Background changes color ie Blue To Red)
+The Banker will give the player an offer to buy his box.
+Player can decide to accept or reject the offer.
+If player accepts the offer, the game ends and the player's bank will have the amount that was offered.
+If player rejects the offer, the game continues.
+// Fourth Round
+The player selects another three boxes.
+The 3 selected boxes will open and show the value.
+There are 6 sealed boxes left
+Once the value is shown, the values are cancelled on the display(Background changes color ie Blue To Red)
+The Banker will give the player an offer to buy his box.
+Player can decide to accept or reject the offer.
+If player accepts the offer, the game ends and the player's bank will have the amount that was offered.
+If player rejects the offer, the game continues.
+// Fifth Round
+The player selects another three boxes.
+The 3 selected boxes will open and show the value.
+There are 3 sealed boxes left
+Once the value is shown, the values are cancelled on the display(Background changes color ie Blue To Red)
+The Banker will give the player an offer to buy his box.
+Player can decide to accept or reject the offer.
+If player accepts the offer, the game ends and the player's bank will have the amount that was offered.
+If player rejects the offer, the game continues.
+// Sixth Round
+The player selects to open 1 Box
+There are 2 sealed boxes left.
+The Banker will give the player an offer to buy his box.
+Player can decide to accept or reject the offer.
+If player accepts the offer, the game ends and the player's bank will have the amount that was offered.
+If player rejects the offer, the game continues.
+// Seventh Round
+The player selects to open 1 Box.
+The box value is shown.
+There is one sealed box left.
+Once the value is shown, the values are cancelled on the display(Background changes color ie Blue To Red)
+The Banker will give the player an offer to buy his box.
+Player can decide to accept or reject the offer.
+If player accepts the offer, the game ends and the player's bank will have the amount that was offered.
+// Final Round
+The player is given an option to switch his box for the remaining sealed box.
+If the box is switched, player will switch the box.
+Else, Player will have the same box that he had.
+Player can then click to open the box and see how much he has gotten.
+
+The game ends and the player's account is credited with the amount that he has won.

@@ -1,0 +1,50 @@
+.wrapper {
+	display: flex;
+	height: 100%;
+	align-items: stretch;
+}
+
+.container-fluid{
+	padding-left: 0px
+}
+
+.money-table {
+	font-size: 20px;
+	text-align: center;
+	margin-top: 15px;
+	width: 90%;
+	height: 70%
+}
+
+.sidebar {
+	background-color: #5ddae2;
+	height: 80%;
+	display: block;
+	position: fixed;
+}
+
+.gameboard {
+	position: fixed;
+	background-color: #aefefe;
+	height: 100%
+}
+
+.game-box{
+	display: block;
+	align-items: stretch;
+	float: left;
+	width: 15%;
+	height: 10%;
+	background-color: #f121dc;
+	padding: 25px;
+	margin: 10px;
+}
+
+
+.footer {
+	background-color: yellow;
+	position: fixed;
+	bottom: 0;
+	height: 20%;
+	width: 100%
+}
