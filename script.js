@@ -104,10 +104,18 @@ function clickBox() {
   checkGame();
 }
 
+const removeClicksOnGameBox = function() {
+  for (i = 0; i < gameBox.length; i++) {
+    gameBox[i].removeEventListener("click", clickBox);
+  }
+};
+
 // Adding Event Listener on each game box to listen for click event
-for (i = 0; i < gameBox.length; i++) {
-  gameBox[i].addEventListener("click", clickBox);
-}
+const allowClicksOnGameBox = function() {
+  for (i = 0; i < gameBox.length; i++) {
+    gameBox[i].addEventListener("click", clickBox);
+  }
+};
 
 let playerDealDecision;
 
@@ -115,6 +123,8 @@ let playerDealDecision;
 dealButton.onclick = function() {
   if (bankerHasAnOffer === true) {
     playerDealDecision = true;
+    messageDisplay.innerText = "Congratulations! You have chosen to sell your box to the banker for $" + parseInt(offerValue).toLocaleString()
+    removeClicksOnGameBox();
     dealCheck();
   }
 };
@@ -122,6 +132,8 @@ dealButton.onclick = function() {
 noDealButton.onclick = function() {
   if (bankerHasAnOffer === true) {
     playerDealDecision = false;
+    messageDisplay.innerText = "OK. Please continue choosing."
+    allowClicksOnGameBox();
     dealCheck();
   }
 };
@@ -132,11 +144,12 @@ const dealCheck = function() {
   if (playerDealDecision === true) {
     console.log("true");
   } else {
-    bankerHasAnOffer = false
-    console.log("game continues")
+    bankerHasAnOffer = false;
+    console.log("game continues");
   }
 };
 
+allowClicksOnGameBox();
 const checkGame = function() {
   // Reduce the total amount in the array to a single value for easy calculation
   let totalPrizeMoney = prizeMoney.reduce(function(a, b) {
@@ -146,6 +159,7 @@ const checkGame = function() {
   let totalSelectedValues = selectedValues.reduce(function(c, d) {
     return c + d;
   });
+
   if (turnNumber === 0) {
     messageDisplay.innerText = "Choose a box.";
   } else if (
@@ -155,12 +169,12 @@ const checkGame = function() {
     turnNumber === 20
   ) {
     // Set the offerValue to be the average remaining value.
-    let offerValue =
+    offerValue =
       (totalPrizeMoney - totalSelectedValues) / (25 - turnNumber);
     messageDisplay.innerText =
       "The banker called! He offered you $" +
       parseInt(offerValue).toLocaleString();
-
+    removeClicksOnGameBox();
     bankerHasAnOffer = true;
   }
 };
