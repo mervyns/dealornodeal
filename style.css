@@ -24,16 +24,11 @@
 	display: block;
 	position: fixed;
 }
-#cover{
-	display:block;
-	height:100%;
-	width:100%;
-	position:absolute;
-}
+
 .gameboard {
 	position: fixed;
 	background-color: #aefefe;
-	/* height: 100% */
+	height: 100%
 }
 
 .game-box{
