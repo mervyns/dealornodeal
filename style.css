@@ -19,14 +19,15 @@
 }
 
 .sidebar {
+	background-image: url("./img/gold-polka-dot-background.jpg");
 	background-color: #5ddae2;
-	height: 80%;
+	height: 100%;
 	display: block;
 	position: fixed;
 }
 
 .gameboard {
-	position: fixed;
+	float: right;
 	background-color: #aefefe;
 	height: 100%
 }
@@ -35,13 +36,13 @@
 	position: relative;
 	left: 5px;
 	top: 5px;
-	display: inline;
-	align-items: stretch;
+	display: inline-block;
 	float: left;
 	width: 15%;
 	height: 10%;
 	background-color: #f121dc;
 	border: 2px solid #1b110a;
+	border-radius: 10px;
 	padding: 25px;
 	margin: 10px;
 	text-align: center;
@@ -65,13 +66,17 @@
 	font-weight: bold;
 }
 
+.player-box{
+	background-color: #f9b92a
+}
+
 .value-box{
 	position: relative;
 	display: inline-block;
 	float: left;
 	width: 120px;
-	height: 35px;
-	background-color: #f121dc;
+	height: 33Apx;
+	background-image: radial-gradient(#ffe767, #a37600);
 	border: 2px solid #1b110a;
 	margin: 1px;
 	text-align: center;
@@ -79,6 +84,7 @@
 
 .strike-box{
 	text-decoration: line-through;
+	background-image: radial-gradient(#df2456, #730613);
 	background-color: #23e95b
 }
 
@@ -101,4 +107,22 @@
 .btn {
 	width: 150px;
 	height: 120px
+}
+
+#message-display {
+	animation-duration: 3s;
+	animation-name: slidein;
+	text-align: center;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
 }

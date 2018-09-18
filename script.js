@@ -33,6 +33,7 @@ let boxNumber = 1;
 // Initialize the number of turns
 let turnNumber = 0;
 
+let initialBoxSelected = false;
 let bankerHasAnOffer = false;
 
 const gameTable = document.getElementById("game-board");
@@ -82,11 +83,16 @@ prizeMoney.forEach(function(item) {
 // Get the Turn Number display
 let turnNumberDisplay = document.getElementById("turn-number");
 let messageDisplay = document.getElementById("message-display");
+let modalDisplay = document.getElementById("modal-display");
+messageDisplay.innerText = "Choose your first box.";
 
 // Setting a function to call when Box is clicked.
 function clickBox() {
-    // Check whether box is already opened. If opened, do not allow the player to click on it again.
-  if (this.classList.contains("opened-box")) {
+  // Check whether box is already opened. If opened, do not allow the player to click on it again.
+  if (initialBoxSelected === false) {
+    this.classList.add("player-box");
+    chooseInitialBox();
+} else if (this.classList.contains("opened-box") || this.classList.contains("player-box")) {
     messageDisplay.innerText =
       "This box is already opened! Please choose another box!";
   } else {
@@ -111,17 +117,24 @@ function clickBox() {
     checkGame();
   }
 }
+// Function for initial player box selection.
+const chooseInitialBox = function() {
+  console.log("Initial Box Chosen");
+  turnNumber++;
+  initialBoxSelected = true;
+};
 
-// Adding Event Listener on each game box to listen for click event
-const allowClicksOnGameBox = function() {
+const initialClick = function() {
   for (i = 0; i < gameBox.length; i++) {
     gameBox[i].addEventListener("click", clickBox);
   }
 };
-// Add a function to remove the click listener to prevent players from clicking on additional boxes before making a decision
-const removeClicksOnGameBox = function() {
+initialClick();
+
+// Adding Event Listener on each game box to listen for click event
+const allowClicksToOpenGameBox = function() {
   for (i = 0; i < gameBox.length; i++) {
-    gameBox[i].removeEventListener("click", clickBox);
+    gameBox[i].addEventListener("click", clickBox);
   }
 };
 
@@ -136,7 +149,6 @@ dealButton.onclick = function() {
     messageDisplay.innerText =
       "Congratulations! You have chosen to sell your box to the banker for $" +
       parseInt(offerValue).toLocaleString();
-    removeClicksOnGameBox();
   }
 };
 
@@ -144,13 +156,10 @@ noDealButton.onclick = function() {
   if (bankerHasAnOffer === true) {
     playerDealDecision = false;
     messageDisplay.innerText = "You chose no deal! Please continue choosing!";
-    allowClicksOnGameBox();
   }
 };
 
 // Create Game Logic
-// Call allowClicksOnGameBox function to allow clicks at the start of the game.
-allowClicksOnGameBox();
 // Check the turn number and give the values based on the turn number.
 const checkGame = function() {
   // Reduce the total amount in the array to a single value for easy calculation
@@ -163,7 +172,7 @@ const checkGame = function() {
   });
 
   if (turnNumber === 0) {
-    messageDisplay.innerText = "Choose a box.";
+    chooseInitialBox();
   } else if (
     turnNumber === 7 ||
     turnNumber === 12 ||
@@ -172,10 +181,11 @@ const checkGame = function() {
   ) {
     // Set the offerValue to be the average remaining value.
     offerValue = (totalPrizeMoney - totalSelectedValues) / (25 - turnNumber);
-    messageDisplay.innerText =
+    modalDisplay.innerText =
       "The banker called! He offered you $" +
       parseInt(offerValue).toLocaleString();
-    removeClicksOnGameBox();
+    // Displaying the player message
+    $("#playerMessageModal").modal("show");
     bankerHasAnOffer = true;
   }
 };
