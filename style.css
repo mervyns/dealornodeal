@@ -1,128 +1,198 @@
-.wrapper {
-	display: flex;
-	height: 100%;
-	align-items: stretch;
-}
-
-.container-fluid{
-	padding-left: 0px
+.container-fluid {
+		padding-left: 0px;
+		height: 100%
 }
 
 .money-table {
-	font-size: 20px;
-	text-align: center;
-	margin-top: 15px;
-	padding: 0px 0px 0px 30px;
-	overflow-y: scroll;
-	width: 90%;
-	height: 100%;
+		font-size: 20px;
+		text-align: center;
+		margin-top: 15px;
+		padding: 0px 0px 0px 30px;
+		overflow-y: scroll;
+		width: 90%;
+		height: 100%;
 }
 
 .sidebar {
-	background-image: url("./img/gold-polka-dot-background.jpg");
-	background-color: #5ddae2;
-	height: 100%;
-	display: block;
-	position: fixed;
+		background-image: url("./img/gold-polka-dot-background.jpg");
+		background-color: #5ddae2;
+		height: 100%;
+		position: fixed;
 }
 
 .gameboard {
-	float: right;
-	background-color: #aefefe;
-	height: 100%
+		float: right;
+		background-color: #b9b9b9;
+		margin: 0px;
+		padding-bottom: 40px;
+		padding-left: 50px;
+		overflow-y: inherit;
+		min-height: 100%;
+		display: inline-block;
 }
 
-.game-box{
-	position: relative;
-	left: 5px;
-	top: 5px;
-	display: inline-block;
-	float: left;
-	width: 15%;
-	height: 10%;
-	background-color: #f121dc;
-	border: 2px solid #1b110a;
-	border-radius: 10px;
-	padding: 25px;
-	margin: 10px;
-	text-align: center;
-	font-weight: bold
+.game-box {
+		position: relative;
+		display: inline-block;
+		width: 15%;
+		height: 10%;
+		background-color: #ec1560;
+		border: 2px solid #1b110a;
+		border-radius: 10px;
+		padding: 25px;
+		margin: 10px;
+		text-align: center;
+		font-weight: bold
 }
 
-.opened-box{
-	position: relative;
-	left: 5px;
-	top: 5px;
-	display: inline;
-	align-items: stretch;
-	float: left;
-	width: 15%;
-	height: 10%;
-	background-color: #89b5e8;
-	border: 2px solid #1b110a;
-	padding: 25px;
-	margin: 10px;
-	text-align: center;
-	font-weight: bold;
+.final-game-box {
+		position: relative;
+		display: inline-block;
+		width: 15%;
+		height: 10%;
+		background-color: #ec1560;
+		border: 2px solid #1b110a;
+		border-radius: 10px;
+		padding: 25px;
+		margin: 10px;
+		text-align: center;
+		font-weight: bold
 }
 
-.player-box{
-	background-color: #f9b92a
+.opened-box {
+		position: relative;
+		display: inline-block;
+		align-items: stretch;
+		width: 15%;
+		height: 10%;
+		background-color: #89b5e8;
+		border: 2px solid #1b110a;
+		border-radius: 10px;
+		padding: 25px;
+		margin: 10px;
+		text-align: center;
+		font-weight: bold;
 }
 
-.value-box{
-	position: relative;
-	display: inline-block;
-	float: left;
-	width: 120px;
-	height: 33Apx;
-	background-image: radial-gradient(#ffe767, #a37600);
-	border: 2px solid #1b110a;
-	margin: 1px;
-	text-align: center;
+.player-box {
+		position: relative;
+		display: inline-block;
+		width: 15%;
+		height: 10%;
+		background-color: #ec1560;
+		border: 2px solid #1b110a;
+		border-radius: 10px;
+		padding: 25px;
+		margin: 10px;
+		text-align: center;
+		font-weight: bold;
+		background-color: #f9b92a
 }
 
-.strike-box{
-	text-decoration: line-through;
-	background-image: radial-gradient(#df2456, #730613);
-	background-color: #23e95b
+.final-player-box {
+		position: relative;
+		display: inline-block;
+		width: 15%;
+		height: 10%;
+		background-color: #ec1560;
+		border: 2px solid #1b110a;
+		border-radius: 10px;
+		padding: 25px;
+		margin: 10px;
+		text-align: center;
+		font-weight: bold;
+		background-color: #f9b92a
+}
+
+.initial-box {
+		background-image: radial-gradient(#ff9999, #ed0202);
+		width: 150px;
+		border: 3px solid #1b110a;
+		border-radius: 10px;
+		padding: 25px;
+		margin: 20px;
+		text-align: center;
+		display: block;
+}
+
+#initial-box-display {
+		background-color: #99d654
+}
+
+.value-box {
+		display: inline-block;
+		background-image: radial-gradient(#ffe767, #a37600);
+		border: 2px solid #1b110a;
+		margin: 1px;
+		text-align: center;
+}
+
+.strike-box {
+		text-decoration: line-through;
+		background-image: radial-gradient(#df2456, #730613);
+		background-color: #23e95b
 }
 
 .footer {
-	background-color: yellow;
-	position: fixed;
-	bottom: 0;
-	height: 20%;
-	width: 100%
+		background-color: yellow;
+		position: fixed;
+		bottom: 0;
+		height: 20%;
+		width: 100%;
+		display: flex
 }
 
-.buttons{
-	position: relative;
-	display: inline;
-	top: 10px;
-	right: 10px;
-	float:right;
+.buttons {
+		position: relative;
+		display: inline-block;
+		top: 10px;
+		right: 10px;
+		float: right;
 }
 
 .btn {
-	width: 150px;
-	height: 120px
+		width: 150px;
+		height: 120px
+}
+
+#chosen-box-text {
+		margin-left: 30px;
+		padding-top: 10px;
+		font-weight: bold;
+}
+
+.initial-box {
+		animation-name: boxin;
+		animation-duration: 3s;
+}
+
+@keyframes boxin {
+		from {
+				margin-top: -150px;
+				margin-left: 250px
+		}
+
+		to {
+				margin-top: 18px;
+				margin-left: 22px
+		}
 }
 
 #message-display {
-	animation-duration: 3s;
-	animation-name: slidein;
-	text-align: center;
+		animation-duration: 3s;
+		animation-name: slidein;
+		display: inline-block;
+		text-align: center;
 }
 
 @keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
-  }
+		from {
+				margin-left: 100%;
+				width: 300%;
+		}
 
-  to {
-    margin-left: 0%;
-    width: 100%;
-  }
+		to {
+				margin-left: 0%;
+				width: 100%;
+		}
 }

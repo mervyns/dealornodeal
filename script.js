@@ -47,6 +47,7 @@ const mappingFunctionToValueTable = function(val) {
   let newCell = document.createElement("div");
   newCell.textContent = val.toLocaleString();
   newCell.setAttribute("class", "value-box");
+  newCell.classList.add("col-md-5");
   valueTable.appendChild(newCell);
 };
 
@@ -54,10 +55,19 @@ const mappingFunctionToGameBox = function(val) {
   let newCell = document.createElement("div");
   newCell.textContent = boxNumber;
   newCell.setAttribute("class", "game-box");
+  newCell.classList.add("col-md-2");
   newCell.setAttribute("id", val);
   gameTable.appendChild(newCell);
   boxNumber++;
 };
+
+// Initialize the various display elements
+let turnNumberDisplay = document.getElementById("turn-number");
+let messageDisplay = document.getElementById("message-display");
+let initialBoxDisplay = document.getElementById("initial-box-display");
+let modalDisplay = document.getElementById("modal-display");
+messageDisplay.innerText =
+  "Choose your initial box. This box will determine your fate in this game!";
 
 //Shuffle values in prizeMoney array
 function getShuffledArray(arr) {
@@ -75,24 +85,37 @@ randomPrizeMoney.forEach(function(item) {
   mappingFunctionToGameBox(item);
 });
 
+// Adding Event Listener on each game box to listen for click event
+const allowClicksToOpenGameBox = function() {
+  for (i = 0; i < gameBox.length; i++) {
+    gameBox[i].addEventListener("click", clickBox);
+  }
+};
+
+allowClicksToOpenGameBox();
+
 // Map game values onto the Values Table at the side
 prizeMoney.forEach(function(item) {
   mappingFunctionToValueTable(item);
 });
-
-// Get the Turn Number display
-let turnNumberDisplay = document.getElementById("turn-number");
-let messageDisplay = document.getElementById("message-display");
-let modalDisplay = document.getElementById("modal-display");
-messageDisplay.innerText = "Choose your first box.";
 
 // Setting a function to call when Box is clicked.
 function clickBox() {
   // Check whether box is already opened. If opened, do not allow the player to click on it again.
   if (initialBoxSelected === false) {
     this.classList.add("player-box");
+    this.classList.remove("game-box");
+    initialBoxItem = document.createElement("div");
+    initialBoxItem.textContent = this.textContent;
+    initialBoxItem.setAttribute("class", "initial-box");
+    initialBoxItem.classList.add("col-md-12");
+    initialBoxItem.setAttribute("id", this.id);
+    initialBoxDisplay.appendChild(initialBoxItem);
     chooseInitialBox();
-} else if (this.classList.contains("opened-box") || this.classList.contains("player-box")) {
+  } else if (
+    this.classList.contains("opened-box") ||
+    this.classList.contains("player-box")
+  ) {
     messageDisplay.innerText =
       "This box is already opened! Please choose another box!";
   } else {
@@ -103,6 +126,7 @@ function clickBox() {
     // Add commas for thousands seperator
     this.innerText = numberValue.toLocaleString();
     this.classList.add("opened-box");
+    this.classList.remove("game-box");
     messageDisplay.innerText =
       "The box you opened has got $" + numberValue.toLocaleString() + " in it.";
     // Increment the Turn Number every time a box is clicked.
@@ -117,25 +141,12 @@ function clickBox() {
     checkGame();
   }
 }
+
 // Function for initial player box selection.
 const chooseInitialBox = function() {
   console.log("Initial Box Chosen");
   turnNumber++;
   initialBoxSelected = true;
-};
-
-const initialClick = function() {
-  for (i = 0; i < gameBox.length; i++) {
-    gameBox[i].addEventListener("click", clickBox);
-  }
-};
-initialClick();
-
-// Adding Event Listener on each game box to listen for click event
-const allowClicksToOpenGameBox = function() {
-  for (i = 0; i < gameBox.length; i++) {
-    gameBox[i].addEventListener("click", clickBox);
-  }
 };
 
 // Initialize the playerDealDecision variable to log whether the player has made a decision or not
@@ -144,18 +155,32 @@ let playerDealDecision;
 // Add Event Listener to Deal or No Deal Buttons to listen for click
 // Set/Toggle the playerDealDecision boolean based on player deal decision
 dealButton.onclick = function() {
-  if (bankerHasAnOffer === true) {
+  if (bankerHasAnOffer === true && turnNumber < 24) {
     playerDealDecision = true;
     messageDisplay.innerText =
       "Congratulations! You have chosen to sell your box to the banker for $" +
       parseInt(offerValue).toLocaleString();
+  } else {
+    messageDisplay.innerText = "You chose to switch your box.";
+    lastBox = document.getElementsByClassName("game-box");
+    playerBox = document.getElementsByClassName("player-box");
+    initialBoxItem.innerText = lastBox[0].textContent;
+    initialBoxItem.id = lastBox[0].id;
+    lastBox[0].classList.add("final-player-box");
+    lastBox[0].classList.remove("game-box");
+    playerBox[0].classList.add("final-game-box");
+    finalGameBox = document.getElementsByClassName("final-game-box")
+    finalGameBox[0].classList.remove("player-box")
   }
 };
 
 noDealButton.onclick = function() {
-  if (bankerHasAnOffer === true) {
+  if (bankerHasAnOffer === true && turnNumber < 24) {
     playerDealDecision = false;
     messageDisplay.innerText = "You chose no deal! Please continue choosing!";
+  } else {
+    messageDisplay.innerText =
+      "You did not switch your box. You will keep your original box.";
   }
 };
 
@@ -175,15 +200,26 @@ const checkGame = function() {
     chooseInitialBox();
   } else if (
     turnNumber === 7 ||
-    turnNumber === 12 ||
-    turnNumber === 16 ||
-    turnNumber === 20
+    turnNumber === 13 ||
+    turnNumber === 18 ||
+    turnNumber === 22
   ) {
     // Set the offerValue to be the average remaining value.
     offerValue = (totalPrizeMoney - totalSelectedValues) / (25 - turnNumber);
     modalDisplay.innerText =
       "The banker called! He offered you $" +
       parseInt(offerValue).toLocaleString();
+    // Displaying the player message
+    $("#playerMessageModal").modal("show");
+    bankerHasAnOffer = true;
+  } else if (turnNumber === 24) {
+    // Set the offerValue to be the average remaining value.
+    offerValue = (totalPrizeMoney - totalSelectedValues) / (25 - turnNumber);
+    dealButton.innerText = "Switch    ";
+    noDealButton.innerText = "Don't Switch!";
+    modalDisplay.innerText =
+      "The banker called! do you want to switch your boxes?";
+    parseInt(offerValue).toLocaleString();
     // Displaying the player message
     $("#playerMessageModal").modal("show");
     bankerHasAnOffer = true;
