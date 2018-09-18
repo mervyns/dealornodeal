@@ -125,7 +125,7 @@ function clickBox() {
     selectedValues.push(numberValue);
     // Add commas for thousands seperator
     this.innerText = numberValue.toLocaleString();
-    this.classList.add("opened-box");
+    this.classList.add("opened-box", "puff-in-center");
     this.classList.remove("game-box");
     messageDisplay.innerText =
       "The box you opened has got $" + numberValue.toLocaleString() + " in it.";
@@ -170,7 +170,8 @@ dealButton.onclick = function() {
     lastBox[0].classList.remove("game-box");
     playerBox[0].classList.add("final-game-box");
     finalGameBox = document.getElementsByClassName("final-game-box")
-    finalGameBox[0].classList.remove("player-box")
+    finalGameBox[0].classList.remove("player-box");
+    endGame();
   }
 };
 
@@ -181,8 +182,30 @@ noDealButton.onclick = function() {
   } else {
     messageDisplay.innerText =
       "You did not switch your box. You will keep your original box.";
+      endGame();
   }
 };
+
+let jumbotronDisplay = document.getElementById("jumbotron")
+
+const showJumbotron = function() {
+    jumbotronDisplay.style.display = "inline-block"
+    jumbotronDisplay.classList.add("heartbeat")
+}
+
+const hideJumbotron = function() {
+    jumbotronDisplay.style.display = "none"
+    answerBankerCall();
+}
+
+const answerBankerCall = function() {
+    modalDisplay.innerText =
+      "The banker called! He offered you $" +
+      parseInt(offerValue).toLocaleString();
+    // Displaying the player message
+    $("#playerMessageModal").modal("show");
+    bankerHasAnOffer = true;
+}
 
 // Create Game Logic
 // Check the turn number and give the values based on the turn number.
@@ -206,16 +229,11 @@ const checkGame = function() {
   ) {
     // Set the offerValue to be the average remaining value.
     offerValue = (totalPrizeMoney - totalSelectedValues) / (25 - turnNumber);
-    modalDisplay.innerText =
-      "The banker called! He offered you $" +
-      parseInt(offerValue).toLocaleString();
-    // Displaying the player message
-    $("#playerMessageModal").modal("show");
-    bankerHasAnOffer = true;
+    showJumbotron();
   } else if (turnNumber === 24) {
     // Set the offerValue to be the average remaining value.
     offerValue = (totalPrizeMoney - totalSelectedValues) / (25 - turnNumber);
-    dealButton.innerText = "Switch    ";
+    dealButton.innerText = "Switch";
     noDealButton.innerText = "Don't Switch!";
     modalDisplay.innerText =
       "The banker called! do you want to switch your boxes?";
@@ -225,3 +243,11 @@ const checkGame = function() {
     bankerHasAnOffer = true;
   }
 };
+
+const endGame = function() {
+    messageDisplay.innerText = "Click on the your box to open!"
+    const lastBoxToBeOpened =document.getElementsByClassName("initial-box")
+    lastBoxToBeOpened[0].addEventListener("click", function(){
+        alert("Congratulations! You won $" + this.id)
+    })
+}
