@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Deal or No Deal</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animation.css">
+    <title>Document</title>
 </head>
 
 <body>
@@ -20,10 +21,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./intro.html">Instructions</a>
+                    <a class="nav-link" href="./index.html">Play!</a>
                 </li>
             </ul>
             <div class="text-display col-md-3" id="turn-number">
@@ -32,26 +33,40 @@
                 Hello
             </div>
         </div>
-            <div class="buttons col-md-3">
+        <div class="buttons col-md-3">
         </div>
     </nav>
     <div class="container-fluid">
         <div class="sidebar col-md-3">
             <div class="money-table" id="money-table">
-            </div>
-            <div class="text-display" id="initial-box-display">
-                <span id="chosen-box-text">Your Chosen Box</span>
+                <div class="text-display" id="instructions-display">
+                    <span id="chosen-box-text">Instructions to play</span>
+                    <li>
+                        <ol>1. Choose your initial box. This box will be your box for the game.</ol>
+                        <ol>2. You can then choose to open and eliminate 6 boxes.</ol>
+                        <ol>3. The banker will then call you with an offer to buy your box</ol>
+                        <ol>4. You can then choose to accept his offer by clicking on the Deal button, or you can reject him by clicking on the No Deal button.</ol>
+                        <ol>5. If you clicked on the No Deal Button, the game continues.</ol>
+                        <ol>6. At the end of the game, you have the option to switch boxes when there is 1 box left.</ol>
+                        <ol>7. Open your box to find out how much money there is inside.</ol>
+                        <p>.</p>
+                        <p>.</p>
+                        <p>.</p>
+                        <p>.</p>
+
+                    </li>
+                </div>
             </div>
         </div>
         <div class="gameboard col-md-9" id="game-board">
             <div class="jumbotron-fluid" id="jumbotron">
                 <div class="container-fluid">
-                <h1 class="display-3" id="jumbotron-title"></h1>
-                <p class="lead" id="jumbotron-content"></p>
+                    <h1 class="display-3" id="jumbotron-title"></h1>
+                    <p class="lead" id="jumbotron-content"></p>
                     <p><img src="" alt="incoming call" id="jumbotron-image"></p>
                     <p><button class="btn" type="button" name="button" onclick="" id="jumbotron-button"></button>
-                </p>
-            </div>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -74,11 +89,12 @@
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script type="text/javascript" src="./js/jumbotron.js"></script>
         <script type="text/javascript" src="./js/script.js"></script>
+        <script type="text/javascript" src="./js/animation.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>
