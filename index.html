@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Deal or No Deal Game</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -25,26 +25,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
             </ul>
+            <div class="text-display col-md-3" id="turn-number">
+            </div>
+            <div class="text-display col-md-9" id="message-display">
+                Hello
+            </div>
+        </div>
+            <div class="buttons col-md-3">
         </div>
     </nav>
     <div class="container-fluid">
         <div class="sidebar col-md-3">
             <div class="money-table" id="money-table">
+            </div>
+            <div class="text-display" id="initial-box-display">
+                <span id="chosen-box-text">Your Chosen Box</span>
             </div>
         </div>
         <div class="gameboard col-md-9" id="game-board">
@@ -59,24 +55,8 @@
             </div>
         </div>
     </div>
-    <div class="footer container-fluid">
-        <div class="text-display col-md-3" id="initial-box-display">
-            <span id="chosen-box-text">Your Chosen Box</span>
-        </div>
-        <div class="text-display col-md-3" id="turn-number">
-        </div>
-        <div class="text-display col-md-3" id="message-display">
-            Hello
-        </div>
-        <div class="buttons col-md-3">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#playerMessageModal">
-              Launch demo modal
-            </button>
-        </div>
-    </div>
     <!-- Modal -->
-    <div class="modal fade bg-dark" id="playerMessageModal" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="playerMessageModal" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -97,7 +77,8 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="./js/jumbotron.js"></script>
+        <script type="text/javascript" src="./js/script.js"></script>
 </body>
 
 </html>

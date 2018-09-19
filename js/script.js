@@ -53,6 +53,7 @@ const mappingFunctionToValueTable = function(val) {
 
 const mappingFunctionToGameBox = function(val) {
   let newCell = document.createElement("div");
+  newCell.style.fontSize = "20px"
   newCell.textContent = boxNumber;
   newCell.setAttribute("class", "game-box");
   newCell.classList.add("col-md-2");
@@ -108,7 +109,7 @@ function clickBox() {
     initialBoxItem = document.createElement("div");
     initialBoxItem.textContent = this.textContent;
     initialBoxItem.setAttribute("class", "initial-box");
-    initialBoxItem.classList.add("col-md-12");
+    initialBoxItem.classList.add("col-md-12", "slide-in-blurred-tr");
     initialBoxItem.setAttribute("id", this.id);
     initialBoxDisplay.appendChild(initialBoxItem);
     chooseInitialBox();
@@ -124,7 +125,8 @@ function clickBox() {
     // Add selected value to selected value array
     selectedValues.push(numberValue);
     // Add commas for thousands seperator
-    this.innerText = numberValue.toLocaleString();
+    this.innerText = "$" + numberValue.toLocaleString();
+    this.style.fontSize = "20px";
     this.classList.add("opened-box", "puff-in-center");
     this.classList.remove("game-box");
     messageDisplay.innerText =
@@ -251,7 +253,7 @@ const checkGame = function() {
     bankerHasAnOffer = true;
   }
 };
-
+// Function for showing Jumbotron with Winning Page
 const showJumbotronWithWinningPage = function(boxNumber, boxId) {
   jumbotronDisplayTitle.innerText = "OPEN YOUR BOXXXXXXX";
   jumbotronDisplayContent.innerText = "OPEN IT!!!!!";
@@ -262,7 +264,7 @@ const showJumbotronWithWinningPage = function(boxNumber, boxId) {
   };
   jumbotronDisplay.style.display = "inline-block";
 };
-
+// Function to call if player accepted the Banker Offer, End game and let player choose to play again
 const acceptedBankerAmountEndGameAndAskToPlayAgain = function(
   bankeramount,
   boxId
@@ -277,12 +279,12 @@ const acceptedBankerAmountEndGameAndAskToPlayAgain = function(
     parseInt(bankeramount).toLocaleString() +
     ". Your original box actually contained $" +
     parseInt(boxId).toLocaleString();
-    jumbotronDisplay.classList.remove("heartbeat")
+  jumbotronDisplay.classList.remove("heartbeat");
   jumbotronDisplayContent.classList.add("bounce-in-top");
   jumbotronDisplayContent.style.fontSize = "30px";
   jumbotronDisplayContent.style.fontWeight = "bold";
-  jumbotronDisplayImage.src="./img/makeitrain.gif"
-  jumbotronDisplayImage.parentNode
+  jumbotronDisplayImage.src = "./img/makeitrain.gif";
+  jumbotronDisplayImage.parentNode;
   jumbotronDisplayContent.style.color = "#ff0000";
   jumbotronDisplayButton.innerText = "Click here to play again!";
   jumbotronDisplayButton.onclick = function() {
@@ -294,7 +296,7 @@ const acceptedBankerAmountEndGameAndAskToPlayAgain = function(
 const showWinningAmountAndAskToPlayAgain = function(boxId) {
   jumbotronDisplayTitle.innerText = "The amount you won is";
   jumbotronDisplayTitle.style.fontSize = "40px";
-  jumbotronDisplayContent.innerText = boxId;
+  jumbotronDisplayContent.innerText = parseInt(boxId).toLocaleString();
   jumbotronDisplayContent.classList.add("tracking-in-contract-bck-top");
   jumbotronDisplayContent.style.fontSize = "100px";
   jumbotronDisplayContent.style.fontWeight = "bold";
@@ -312,7 +314,4 @@ const endGame = function() {
     lastBoxToBeOpened[0].innerText,
     lastBoxToBeOpened[0].id
   );
-  lastBoxToBeOpened[0].addEventListener("click", function() {
-    alert("Congratulations! You won $" + this.id);
-  });
 };
