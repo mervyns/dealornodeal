@@ -157,6 +157,9 @@ let playerDealDecision;
 dealButton.onclick = function() {
   if (bankerHasAnOffer === true && turnNumber < 24) {
     playerDealDecision = true;
+    const lastBoxToBeOpened = document.getElementsByClassName("initial-box");
+    const boxId = lastBoxToBeOpened[0].id;
+    acceptedBankerAmountEndGameAndAskToPlayAgain(offerValue, boxId);
     messageDisplay.innerText =
       "Congratulations! You have chosen to sell your box to the banker for $" +
       parseInt(offerValue).toLocaleString();
@@ -169,7 +172,7 @@ dealButton.onclick = function() {
     lastBox[0].classList.add("final-player-box");
     lastBox[0].classList.remove("game-box");
     playerBox[0].classList.add("final-game-box");
-    finalGameBox = document.getElementsByClassName("final-game-box")
+    finalGameBox = document.getElementsByClassName("final-game-box");
     finalGameBox[0].classList.remove("player-box");
     endGame();
   }
@@ -182,30 +185,35 @@ noDealButton.onclick = function() {
   } else {
     messageDisplay.innerText =
       "You did not switch your box. You will keep your original box.";
-      endGame();
+    endGame();
   }
 };
 
-let jumbotronDisplay = document.getElementById("jumbotron")
+// Create variables for each element of the Jumbotron to make it easier to change the content after
+const jumbotronDisplay = document.getElementById("jumbotron");
+const jumbotronDisplayTitle = document.getElementById("jumbotron-title");
+const jumbotronDisplayContent = document.getElementById("jumbotron-content");
+const jumbotronDisplayImage = document.getElementById("jumbotron-image");
+const jumbotronDisplayButton = document.getElementById("jumbotron-button");
 
-const showJumbotron = function() {
-    jumbotronDisplay.style.display = "inline-block"
-    jumbotronDisplay.classList.add("heartbeat")
-}
+const showJumbotronWithBankerCall = function() {
+  jumbotronDisplay.style.display = "inline-block";
+  jumbotronDisplay.classList.add("heartbeat");
+};
 
 const hideJumbotron = function() {
-    jumbotronDisplay.style.display = "none"
-    answerBankerCall();
-}
+  jumbotronDisplay.style.display = "none";
+  answerBankerCall();
+};
 
 const answerBankerCall = function() {
-    modalDisplay.innerText =
-      "The banker called! He offered you $" +
-      parseInt(offerValue).toLocaleString();
-    // Displaying the player message
-    $("#playerMessageModal").modal("show");
-    bankerHasAnOffer = true;
-}
+  modalDisplay.innerText =
+    "The banker called! He offered you $" +
+    parseInt(offerValue).toLocaleString();
+  // Displaying the player message
+  $("#playerMessageModal").modal("show");
+  bankerHasAnOffer = true;
+};
 
 // Create Game Logic
 // Check the turn number and give the values based on the turn number.
@@ -229,14 +237,14 @@ const checkGame = function() {
   ) {
     // Set the offerValue to be the average remaining value.
     offerValue = (totalPrizeMoney - totalSelectedValues) / (25 - turnNumber);
-    showJumbotron();
+    showJumbotronWithBankerCall();
   } else if (turnNumber === 24) {
     // Set the offerValue to be the average remaining value.
     offerValue = (totalPrizeMoney - totalSelectedValues) / (25 - turnNumber);
-    dealButton.innerText = "Switch";
-    noDealButton.innerText = "Don't Switch!";
     modalDisplay.innerText =
       "The banker called! do you want to switch your boxes?";
+    dealButton.innerText = "Switch";
+    noDealButton.innerText = "Don't Switch!";
     parseInt(offerValue).toLocaleString();
     // Displaying the player message
     $("#playerMessageModal").modal("show");
@@ -244,10 +252,67 @@ const checkGame = function() {
   }
 };
 
+const showJumbotronWithWinningPage = function(boxNumber, boxId) {
+  jumbotronDisplayTitle.innerText = "OPEN YOUR BOXXXXXXX";
+  jumbotronDisplayContent.innerText = "OPEN IT!!!!!";
+  jumbotronDisplayImage.parentNode.removeChild(jumbotronDisplayImage);
+  jumbotronDisplayButton.innerText = "Open Box Number " + boxNumber;
+  jumbotronDisplayButton.onclick = function() {
+    showWinningAmountAndAskToPlayAgain(boxId);
+  };
+  jumbotronDisplay.style.display = "inline-block";
+};
+
+const acceptedBankerAmountEndGameAndAskToPlayAgain = function(
+  bankeramount,
+  boxId
+) {
+  const lastBoxToBeOpened = document.getElementsByClassName("initial-box");
+  jumbotronDisplayTitle.innerText = "Congratulations!";
+  jumbotronDisplayTitle.style.color = "#ff0000";
+  jumbotronDisplayTitle.style.fontWeight = "bold";
+  jumbotronDisplayTitle.style.fontSize = "25px";
+  jumbotronDisplayContent.innerText =
+    "You accepted the banker amount of $" +
+    parseInt(bankeramount).toLocaleString() +
+    ". Your original box actually contained $" +
+    parseInt(boxId).toLocaleString();
+    jumbotronDisplay.classList.remove("heartbeat")
+  jumbotronDisplayContent.classList.add("bounce-in-top");
+  jumbotronDisplayContent.style.fontSize = "30px";
+  jumbotronDisplayContent.style.fontWeight = "bold";
+  jumbotronDisplayImage.src="./img/makeitrain.gif"
+  jumbotronDisplayImage.parentNode
+  jumbotronDisplayContent.style.color = "#ff0000";
+  jumbotronDisplayButton.innerText = "Click here to play again!";
+  jumbotronDisplayButton.onclick = function() {
+    window.location.reload();
+  };
+  jumbotronDisplay.style.display = "inline-block";
+};
+
+const showWinningAmountAndAskToPlayAgain = function(boxId) {
+  jumbotronDisplayTitle.innerText = "The amount you won is";
+  jumbotronDisplayTitle.style.fontSize = "40px";
+  jumbotronDisplayContent.innerText = boxId;
+  jumbotronDisplayContent.classList.add("tracking-in-contract-bck-top");
+  jumbotronDisplayContent.style.fontSize = "100px";
+  jumbotronDisplayContent.style.fontWeight = "bold";
+  jumbotronDisplayContent.style.color = "#ff0000";
+  jumbotronDisplayButton.innerText = "Click here to play again!";
+  jumbotronDisplayButton.onclick = function() {
+    window.location.reload();
+  };
+};
+
 const endGame = function() {
-    messageDisplay.innerText = "Click on the your box to open!"
-    const lastBoxToBeOpened =document.getElementsByClassName("initial-box")
-    lastBoxToBeOpened[0].addEventListener("click", function(){
-        alert("Congratulations! You won $" + this.id)
-    })
-}
+  messageDisplay.innerText = "Click on the your box to open!";
+  const lastBoxToBeOpened = document.getElementsByClassName("initial-box");
+  showJumbotronWithWinningPage(
+    lastBoxToBeOpened[0].innerText,
+    lastBoxToBeOpened[0].id
+  );
+  lastBoxToBeOpened[0].addEventListener("click", function() {
+    alert("Congratulations! You won $" + this.id);
+  });
+};
