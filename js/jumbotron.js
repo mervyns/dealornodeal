@@ -99,10 +99,11 @@ const acceptedBankerAmountEndGameAndAskToPlayAgain = function(
 const showWinningAmountAndAskToPlayAgain = function(boxId) {
   jumbotronDisplayTitle.innerText = "The amount you won is";
   jumbotronDisplayTitle.style.fontSize = "40px";
+  jumbotronDisplayImage.src="./img/makeitrain.gif"
   jumbotronDisplayContent.innerText = parseInt(boxId).toLocaleString();
   jumbotronDisplayContent.classList.add("tracking-in-contract-bck-top");
   jumbotronDisplay.classList.remove("heartbeat");
-  jumbotronDisplayContent.style.fontSize = "900px";
+  jumbotronDisplayContent.style.fontSize = "90px";
   jumbotronDisplayContent.style.fontWeight = "bold";
   jumbotronDisplayContent.style.color = "#ff0000";
   jumbotronDisplayButton.innerText = "Click here to play again!";
